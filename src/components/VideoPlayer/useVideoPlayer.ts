@@ -79,17 +79,16 @@ function useVideoPlayer(videoElement?: RefObject<HTMLVideoElement> | null): Vide
     const onUpdateProgress = () => {
         if (!videoElement || !videoElement?.current) {
             return
+        }
+        const currentTimeVd = videoElement.current.currentTime
+        const durationVd = videoElement.current.duration
+
+         if (currentTimeVd === durationVd) {
+            setVideoEnd(true)
          }
 
          if (!duration) {
             setDuration(videoElement.current.duration)
-         }
-
-         const currentTimeVd = videoElement.current.currentTime
-         const durationVd = videoElement.current.duration
-         
-         if (currentTimeVd === durationVd) {
-            setVideoEnd(true)
          }
 
          const currentTime = (currentTimeVd / durationVd) * 100;

@@ -20,6 +20,29 @@ interface VideoPlayerProps {
 const controlElementId = (parentId: string, elementId: string) => `${parentId}-${elementId}`
 
 
+const PlayCenterControl = ({ isVideoEnd, isPlaying, togglePlay, watchAgain, id }: any) => {
+    const showCenterControl = !isPlaying || isVideoEnd
+
+    return    showCenterControl ? 
+                    <Flex
+                        position="absolute"
+                        zIndex={10}
+                    >
+                            <WatchAgainButton 
+                                isVideoEnd={isVideoEnd} 
+                                onClick={watchAgain} 
+                                id={controlElementId(id, 'watch-again')} 
+                            />
+                          {!isVideoEnd &&  <PlayButton
+                                onClick={togglePlay}
+                                isPlaying={isPlaying}
+                                type={PlayBtnType.BUTTON}
+                                id={controlElementId(id, 'play-btn')} 
+                            />}
+                    </Flex> 
+                    : null
+            
+}
 
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ id, source }) => {
@@ -44,6 +67,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ id, source }) => {
         isVideoEnd
      } = useVideoPlayer(videoElement)
 
+
+
+     
      
 
     return <Flex
@@ -54,7 +80,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ id, source }) => {
             alignItems="center"
             id={`${id}-container`}
             width={'722px'}
-            
         >
                 <video 
                     style={{
@@ -65,22 +90,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ id, source }) => {
                     onTimeUpdate={onUpdateProgress}
                 />
         
-                {!isPlaying ? 
-                    <Flex
-                        position="absolute"
-                        zIndex={10}
-                    >
-                            <WatchAgainButton isVideoEnd={!isVideoEnd} onClick={watchAgain} id={controlElementId(id, 'watch-again')} />
-                            <PlayButton
-                                onClick={togglePlay}
-                                isPlaying={isPlaying}
-                                type={PlayBtnType.BUTTON}
-                                id={controlElementId(id, 'play-btn')} 
-                            />
-                    </Flex> 
-                    : null
-                }
-            
+       
+            <PlayCenterControl
+                isPlaying={isPlaying}
+                isVideoEnd={isVideoEnd}
+                togglePlay={togglePlay}
+                watchAgain={watchAgain}
+            />
             <Flex
                 flexDirection={'column'}
                 position="absolute"

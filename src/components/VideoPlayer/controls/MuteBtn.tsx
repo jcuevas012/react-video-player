@@ -41,6 +41,7 @@ const MuteButton: React.FC<MuteButtonProps> = ({ id, onClick, muted }) => {
 
     return  <Icon 
                 cursor="pointer"    
+                _hover={{ color: "#0865FF", stroke: "#0865FF", fill: "#0865FF" }}
                 aria-label="mute" 
                 id={id} 
                 mr={'4px'}

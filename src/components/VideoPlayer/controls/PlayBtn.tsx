@@ -31,10 +31,14 @@ const PlayButton: React.FC<PlayButtonProps> = ({ id, onClick, isPlaying, type = 
     return  type === PlayBtnType.BUTTON ?
                 <Button 
                   id={id} 
+                  _hover={{
+                    backgroundColor: "rgba(0, 0, 0, 0.5)"
+                  }}
                   width={100}
                   height={100}
+                  border="solid"
+                  borderWidth={"2px"}
                   borderRadius={"50%"}
-                  border="2px solid #FFFFFF"
                   variant='outline' 
                   onClick={onClick}
                   borderColor="white"
@@ -51,6 +55,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({ id, onClick, isPlaying, type = 
                 </Button>
                 :
                 <Icon
+                    _hover={{ color: "#0865FF", stroke: "#0865FF", fill: "#0865FF" }}
                     cursor="pointer"
                     onClick={onClick}
                     width="35px" 

@@ -11,6 +11,7 @@ interface FullScreenButtonProps {
 const FullScreenButton: React.FC<FullScreenButtonProps> = ({ id, onClick }) => {
 
     return  <Icon 
+                _hover={{ color: "#0865FF", stroke: "#0865FF", fill: "#0865FF" }}
                 cursor="pointer"
                 aria-label="full-screen" 
                 id={id} 
