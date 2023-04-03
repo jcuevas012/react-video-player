@@ -1,8 +1,6 @@
 import  React from "react"
 import {
   ChakraProvider,
-  Box,
-  VStack,
   Container,
   Grid,
 } from "@chakra-ui/react"
