@@ -17,8 +17,10 @@ const VolumeSlider : React.FC<VolumeSliderProps> = ({ id, onVolumeChange, volume
     }
 
     return  <Slider
+                width={"72px"}
                 min={0}
                 max={10} 
+                colorScheme="pink"
                 id={id} 
                 onChange={onChange} 
                 defaultValue={volume}

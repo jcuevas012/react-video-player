@@ -1,13 +1,14 @@
 import React, { useRef } from "react"
-import { Box } from "@chakra-ui/react";
+import { Box, Flex  } from "@chakra-ui/react";
 import useVideoPlayer from "./useVideoPlayer";
-import PlayButton from "./controls/PlayButton";
+import PlayButton, { ButtonType } from "./controls/PlayBtn";
 import FullScreenButton from "./controls/FullScreenButton";
-import MuteButton from "./controls/MuteButton";
+import MuteButton from "./controls/MuteBtn";
 import VideoSpeed from "./controls/VideoSpeed";
 import DisplayTime from "./controls/DisplayTime";
 import VolumeSlider from "./controls/VolumeSlider";
 import ProgressBarSlider from "./controls/ProgessBarSlider";
+import WatchAgainButton from "./controls/WatchAgainBtn";
 
 
 interface VideoPlayerProps {
@@ -17,6 +18,8 @@ interface VideoPlayerProps {
 
 
 const controlElementId = (parentId: string, elementId: string) => `${parentId}-${elementId}`
+
+
 
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ id, source }) => {
@@ -35,24 +38,96 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ id, source }) => {
         progress,
         onVolumeChange,
         currentVolume,
-        handleManualProgress
+        handleManualProgress,
+        currentTime,
+        watchAgain,
+        isVideoEnd
      } = useVideoPlayer(videoElement)
 
 
-    return <Box>
+    return <Flex
+            alignContent={"center"}
+            justifyContent="center"
+            alignSelf={'center'}
+            position={'relative'}
+            id={`${id}-container`}
+            width={'722px'}
+            
+        >
                 <video 
+                    style={{
+                        zIndex: 1
+                    }}
                     id={id} src={source} 
                     ref={videoElement}  
                     onTimeUpdate={onUpdateProgress}
                 />
-                <ProgressBarSlider handleManualProgress={handleManualProgress} duration={duration} progress={progress} id={controlElementId(id, 'progrss-bar')} />
-                <DisplayTime duration={duration} currentProgress={progress} id={controlElementId(id, 'display-time')}/>
-                <PlayButton onClick={togglePlay} isPlaying={isPlaying} id={controlElementId(id, 'play-btn')} />
-                <FullScreenButton onClick={onFullScreen} id={controlElementId(id, 'fullscreen-btn')} />
-                <MuteButton onClick={onMuted}  muted={muted} id={controlElementId(id, 'mute-btn')} />
-                <VideoSpeed onClick={handleVideoSpeed} id={controlElementId(id, 'mute-btn')} currentVelocity={currentSpeed} />
-                <VolumeSlider onVolumeChange={onVolumeChange} volume={currentVolume} id={controlElementId(id, 'volume-slider')} />
-            </Box>
+                <WatchAgainButton isVideoEnd={!isVideoEnd} onClick={watchAgain} id={controlElementId(id, 'watch-again')} />
+
+
+            <Flex
+                flexDirection={'column'}
+                position="absolute"
+                zIndex={10}
+                width={'97%'}
+                bottom={15}
+            >
+            <ProgressBarSlider 
+                handleManualProgress={handleManualProgress}  
+                progress={progress} id={controlElementId(id, 'progrss-bar')} 
+                />
+           <Flex
+                top={-2}
+                backgroundColor="rgba(0, 0, 0, 0.1)"
+                borderBottomRadius={"25px"}
+                flexDirection={"row"}
+                mt={2}
+                pt={2}
+                pl={'14px'}
+                pr={'14px'}
+                pb={2}
+                verticalAlign={"center"}
+            >
+                <Flex
+                    flex={2}
+                    alignItems="center"
+                    justifyContent="left"
+                >
+                    <PlayButton
+                    type={ButtonType.ICON}
+                    onClick={togglePlay} 
+                    isPlaying={isPlaying} 
+                    id={controlElementId(id, 'play-btn')} />
+                    <MuteButton 
+                        onClick={onMuted}  
+                        muted={muted} 
+                        id={controlElementId(id, 'mute-btn')} />
+                    <VolumeSlider 
+                        onVolumeChange={onVolumeChange} 
+                        volume={currentVolume} 
+                        id={controlElementId(id, 'volume-slider')} />
+                </Flex>
+                <Flex
+                        flex={6}
+                        alignItems="center"
+                        justifyContent="center"
+
+                    >
+                    <DisplayTime 
+                        duration={duration} 
+                        currentProgress={currentTime} 
+                        id={controlElementId(id, 'display-time')}/>
+                </Flex>    
+                <Flex
+                    flex={1}
+                >
+                    <VideoSpeed onClick={handleVideoSpeed} id={controlElementId(id, 'mute-btn')} currentVelocity={currentSpeed} />
+                    <FullScreenButton onClick={onFullScreen} id={controlElementId(id, 'fullscreen-btn')} />
+                </Flex>
+            </Flex>
+        </Flex>
+       
+        </Flex>
 }
 
 

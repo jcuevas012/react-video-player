@@ -1,5 +1,5 @@
-import { Box } from "@chakra-ui/react"
-import React, { useMemo } from "react"
+import { Box, Text } from "@chakra-ui/react"
+import React, { useCallback, useMemo } from "react"
 
 
 interface DisplayTimeProps {
@@ -12,25 +12,34 @@ interface DisplayTimeProps {
 const DisplayTime : React.FC<DisplayTimeProps> = ({ id, currentProgress, duration }) => {
 
 
-    const getFormatTime = (time: number) => {
-        let minutes = Math.floor(time / 60);   
-        let seconds = Math.floor(time % 60);
-        return `${minutes}:${seconds}`
-    }
+
+    const getSecondsToVideoTime = useCallback((time: number) => {
+        const minutes = Math.floor(time / 60);
+        let seconds = (time % 60);
+
+        const getFormattedValue = (value: number) => `${value < 10 ? "0" + value : value}`.split('.')[0]
+
+        return `${getFormattedValue(minutes)}:${getFormattedValue(seconds)}`
+    }, [])
+
     
     const currentTime = useMemo(() => {
-        return getFormatTime(currentProgress)
-    }, [currentProgress])
+        return getSecondsToVideoTime(currentProgress)
+    }, [currentProgress, getSecondsToVideoTime])
     
     
         
     const totalTime = useMemo(() => {
-        return getFormatTime(duration)
-    }, [duration])
+        return getSecondsToVideoTime(duration)
+    }, [duration, getSecondsToVideoTime])
 
-    return  <Box id={id}>
-                <p>{currentTime}/{totalTime}</p>
-            </Box>
+    return <Text
+            fontSize={'16px'}
+            fontWeight={400}
+            fontStyle={'normal'}
+            color={'#FFFFFF'} >
+                {currentTime} / {totalTime}
+            </Text>
 }
 
 

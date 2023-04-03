@@ -15,6 +15,9 @@ interface VideoPlayerHookResult {
     currentVolume: number;
     onVolumeChange: (volume: number) => void
     handleManualProgress: (volume: number) => void
+    currentTime: number
+    isVideoEnd: boolean
+    watchAgain: () => void
 
 }
 
@@ -26,6 +29,8 @@ function useVideoPlayer(videoElement?: RefObject<HTMLVideoElement> | null): Vide
     const [speed, setSpeed] = useState(1)
     const [duration, setDuration] = useState(0)
     const [currentVolume, setCurrentVolume] = useState(videoElement?.current?.volume || 6)
+    const [currentTime, setCurrentTime] = useState(0)
+    const [isVideoEnd, setVideoEnd] = useState(false)
 
 
 
@@ -40,6 +45,11 @@ function useVideoPlayer(videoElement?: RefObject<HTMLVideoElement> | null): Vide
         
     }
 
+    const watchAgain = () => {
+        setVideoEnd(false)
+        handleManualProgress(0)
+        videoElement?.current?.play()
+    }
 
     const onFullScreen = () =>  {
         if (!videoElement) {
@@ -74,7 +84,16 @@ function useVideoPlayer(videoElement?: RefObject<HTMLVideoElement> | null): Vide
          if (!duration) {
             setDuration(videoElement.current.duration)
          }
-         const currentTime = (videoElement.current.currentTime / videoElement.current.duration) * 100;
+
+         const currentTimeVd = videoElement.current.currentTime
+         const durationVd = videoElement.current.duration
+         
+         if (currentTimeVd === durationVd) {
+            setVideoEnd(true)
+         }
+
+         const currentTime = (currentTimeVd / durationVd) * 100;
+        setCurrentTime(videoElement.current.currentTime)
         setProgress(currentTime)
     }
 
@@ -100,15 +119,14 @@ function useVideoPlayer(videoElement?: RefObject<HTMLVideoElement> | null): Vide
     }
 
 
-  const handleManualProgress = (progress: number) => {
+  const handleManualProgress = (value: number) => {
 
     if (!videoElement || !videoElement.current) {
         return
     }
 
-    // const newProgress = (videoElement.current.duration / 100) * progress;
-    // videoElement.current.currentTime = progress
-    setProgress(progress)
+    videoElement.current.currentTime = (videoElement.current.duration / 100) * value;
+    setProgress(value)
   };
 
     return {
@@ -125,7 +143,10 @@ function useVideoPlayer(videoElement?: RefObject<HTMLVideoElement> | null): Vide
         duration,
         currentVolume, 
         onVolumeChange,
-        handleManualProgress
+        handleManualProgress,
+        currentTime,
+        isVideoEnd,
+        watchAgain
     }
 }
 
