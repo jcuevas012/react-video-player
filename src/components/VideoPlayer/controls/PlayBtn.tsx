@@ -1,7 +1,7 @@
 import React from "react"
 import { Button, Icon } from "@chakra-ui/react";
 
- enum ButtonType {
+ enum PlayBtnType {
     BUTTON,
     ICON
 }
@@ -10,11 +10,11 @@ interface PlayButtonProps {
     id: string
     onClick: () => void
     isPlaying: boolean
-    type?: ButtonType
+    type?: PlayBtnType
 }
 
 
-const PlayButton: React.FC<PlayButtonProps> = ({ id, onClick, isPlaying, type = ButtonType.BUTTON }) => {
+const PlayButton: React.FC<PlayButtonProps> = ({ id, onClick, isPlaying, type = PlayBtnType.BUTTON }) => {
 
      const PlayIcon = () => {
         return <path d="M23.7165 14.9285C25.6574 16.0939 25.6574 18.9071 23.7165 20.0725L9.25 28.7588L9.25 6.24219L23.7165 14.9285Z" fill="white"/>    
@@ -28,9 +28,26 @@ const PlayButton: React.FC<PlayButtonProps> = ({ id, onClick, isPlaying, type = 
         
      }   
 
-    return  type === ButtonType.BUTTON ?
-                <Button id={id} colorScheme='teal' opacity={10} variant='outline' onClick={onClick}>
-                    {isPlaying  ? 'Pause' : 'Play'}
+    return  type === PlayBtnType.BUTTON ?
+                <Button 
+                  id={id} 
+                  width={100}
+                  height={100}
+                  borderRadius={"50%"}
+                  border="2px solid #FFFFFF"
+                  variant='outline' 
+                  onClick={onClick}
+                  borderColor="white"
+                  backgroundColor="rgba(0, 0, 0, 0.5)"
+                  >
+                    <Icon
+                        width="41.82px" 
+                        height="34.82px" 
+                        viewBox="0 0 35 35" 
+                        fill="none"
+                    >
+                        {isPlaying ? <PauseIcon/> : <PlayIcon/>}
+                    </Icon>
                 </Button>
                 :
                 <Icon
@@ -45,6 +62,6 @@ const PlayButton: React.FC<PlayButtonProps> = ({ id, onClick, isPlaying, type = 
                 </Icon>    
 }
 
-export { ButtonType }
+export { PlayBtnType }
 
 export default PlayButton;

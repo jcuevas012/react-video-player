@@ -1,7 +1,7 @@
 import React, { useRef } from "react"
 import { Box, Flex  } from "@chakra-ui/react";
 import useVideoPlayer from "./useVideoPlayer";
-import PlayButton, { ButtonType } from "./controls/PlayBtn";
+import PlayButton, { PlayBtnType } from "./controls/PlayBtn";
 import FullScreenButton from "./controls/FullScreenButton";
 import MuteButton from "./controls/MuteBtn";
 import VideoSpeed from "./controls/VideoSpeed";
@@ -44,12 +44,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ id, source }) => {
         isVideoEnd
      } = useVideoPlayer(videoElement)
 
+     
 
     return <Flex
             alignContent={"center"}
             justifyContent="center"
             alignSelf={'center'}
             position={'relative'}
+            alignItems="center"
             id={`${id}-container`}
             width={'722px'}
             
@@ -62,9 +64,23 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ id, source }) => {
                     ref={videoElement}  
                     onTimeUpdate={onUpdateProgress}
                 />
-                <WatchAgainButton isVideoEnd={!isVideoEnd} onClick={watchAgain} id={controlElementId(id, 'watch-again')} />
-
-
+        
+                {!isPlaying ? 
+                    <Flex
+                        position="absolute"
+                        zIndex={10}
+                    >
+                            <WatchAgainButton isVideoEnd={!isVideoEnd} onClick={watchAgain} id={controlElementId(id, 'watch-again')} />
+                            <PlayButton
+                                onClick={togglePlay}
+                                isPlaying={isPlaying}
+                                type={PlayBtnType.BUTTON}
+                                id={controlElementId(id, 'play-btn')} 
+                            />
+                    </Flex> 
+                    : null
+                }
+            
             <Flex
                 flexDirection={'column'}
                 position="absolute"
@@ -94,10 +110,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ id, source }) => {
                     justifyContent="left"
                 >
                     <PlayButton
-                    type={ButtonType.ICON}
+                    type={PlayBtnType.ICON}
                     onClick={togglePlay} 
                     isPlaying={isPlaying} 
-                    id={controlElementId(id, 'play-btn')} />
+                    id={controlElementId(id, 'play-btn-icon')} />
                     <MuteButton 
                         onClick={onMuted}  
                         muted={muted} 
