@@ -10,12 +10,13 @@ In the project directory, you can run:
 ## Usage 
 
   
-### `
+```jsx
 <VideoPlayer source={VIDEO_SOURCE}   id="firstPlayer" />
-`
+```
 
 ## Hook
-### `
+
+```jsx
     const videoElement = useRef<HTMLVideoElement>(null)
     const { 
         togglePlay, 
@@ -35,4 +36,4 @@ In the project directory, you can run:
         watchAgain,
         isVideoEnd
      } = useVideoPlayer(videoElement)
-`
+```
