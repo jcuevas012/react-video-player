@@ -1,36 +1,39 @@
-import * as React from "react"
+import  React from "react"
 import {
   ChakraProvider,
   Box,
-  Text,
-  Link,
   VStack,
-  Code,
-  Grid,
   theme,
+  Container,
+  Grid,
 } from "@chakra-ui/react"
 import { ColorModeSwitcher } from "./ColorModeSwitcher"
-import { Logo } from "./Logo"
+import {VideoPlayer} from "./components/VideoPlayer"
+
+const VIDEO_SOURCE = 'https://ours-wellness-testing-public.s3.us-west-2.amazonaws.com/video-1080+(1).mp4'
+
+
+
+const VideoPlayerWrapper = () => {
+  return  (
+          <Container>
+              <VideoPlayer
+                source={VIDEO_SOURCE}
+                id={'firstPlayer'}
+              />
+            </Container>
+         )
+}
+
+
 
 export const App = () => (
-  <ChakraProvider theme={theme}>
+<ChakraProvider theme={theme}>
     <Box textAlign="center" fontSize="xl">
       <Grid minH="100vh" p={3}>
         <ColorModeSwitcher justifySelf="flex-end" />
         <VStack spacing={8}>
-          <Logo h="40vmin" pointerEvents="none" />
-          <Text>
-            Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
-          </Text>
-          <Link
-            color="teal.500"
-            href="https://chakra-ui.com"
-            fontSize="2xl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn Chakra
-          </Link>
+          <VideoPlayerWrapper/>
         </VStack>
       </Grid>
     </Box>
