@@ -1,33 +1,37 @@
-import { Slider, SliderFilledTrack, SliderThumb, SliderTrack } from "@chakra-ui/react"
+import { Slider, SliderFilledTrack, SliderTrack } from "@chakra-ui/react"
 import React from "react"
 
 
-interface VolumeSliderProps {
+interface ProgressBarSliderProps {
     id: string
-    volume: number;
-    onVolumeChange: (volume: number) => void
+    progress: number;
+    duration: number;
+    handleManualProgress: (volume: number) => void
 }
 
 
-const VolumeSlider : React.FC<VolumeSliderProps> = ({ id, onVolumeChange, volume }) => {
+const ProgressBarSlider : React.FC<ProgressBarSliderProps> = ({ id, progress, duration, handleManualProgress }) => {
+
 
     const onChange = (value: number) => {
-        const volume = value === 10 ? 1.0 : parseFloat(`0.${value}`)
-        onVolumeChange(volume)
+        console.log('---------->>>', value)
+        handleManualProgress(value)
     }
+
+    console.log(duration)
 
     return  <Slider
                 min={0}
-                max={10} 
+                max={duration} 
+                onChange={onChange}
                 id={id} 
-                onChange={onChange} 
+                value={progress}
                 >
                 <SliderTrack>
                     <SliderFilledTrack />
                 </SliderTrack>
-                <SliderThumb />
             </Slider>
 }
 
 
-export default VolumeSlider;
+export default ProgressBarSlider;

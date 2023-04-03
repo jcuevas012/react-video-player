@@ -14,6 +14,7 @@ interface VideoPlayerHookResult {
     duration: number
     currentVolume: number;
     onVolumeChange: (volume: number) => void
+    handleManualProgress: (volume: number) => void
 
 }
 
@@ -24,7 +25,7 @@ function useVideoPlayer(videoElement?: RefObject<HTMLVideoElement> | null): Vide
     const [muted, setMuted] = useState(false)
     const [speed, setSpeed] = useState(1)
     const [duration, setDuration] = useState(0)
-    const [currentVolume, setCurrentVolume] = useState(videoElement?.current?.volume || 0.5)
+    const [currentVolume, setCurrentVolume] = useState(videoElement?.current?.volume || 6)
 
 
 
@@ -98,6 +99,18 @@ function useVideoPlayer(videoElement?: RefObject<HTMLVideoElement> | null): Vide
         
     }
 
+
+  const handleManualProgress = (progress: number) => {
+
+    if (!videoElement || !videoElement.current) {
+        return
+    }
+
+    // const newProgress = (videoElement.current.duration / 100) * progress;
+    // videoElement.current.currentTime = progress
+    setProgress(progress)
+  };
+
     return {
         togglePlay,
         onFullScreen,
@@ -111,7 +124,8 @@ function useVideoPlayer(videoElement?: RefObject<HTMLVideoElement> | null): Vide
         onPlayingTimeUpdate,
         duration,
         currentVolume, 
-        onVolumeChange
+        onVolumeChange,
+        handleManualProgress
     }
 }
 

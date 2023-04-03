@@ -7,6 +7,7 @@ import MuteButton from "./controls/MuteButton";
 import VideoSpeed from "./controls/VideoSpeed";
 import DisplayTime from "./controls/DisplayTime";
 import VolumeSlider from "./controls/VolumeSlider";
+import ProgressBarSlider from "./controls/ProgessBarSlider";
 
 
 interface VideoPlayerProps {
@@ -34,7 +35,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ id, source }) => {
         progress,
         onVolumeChange,
         currentVolume,
-        
+        handleManualProgress
      } = useVideoPlayer(videoElement)
 
 
@@ -44,6 +45,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ id, source }) => {
                     ref={videoElement}  
                     onTimeUpdate={onUpdateProgress}
                 />
+                <ProgressBarSlider handleManualProgress={handleManualProgress} duration={duration} progress={progress} id={controlElementId(id, 'progrss-bar')} />
                 <DisplayTime duration={duration} currentProgress={progress} id={controlElementId(id, 'display-time')}/>
                 <PlayButton onClick={togglePlay} isPlaying={isPlaying} id={controlElementId(id, 'play-btn')} />
                 <FullScreenButton onClick={onFullScreen} id={controlElementId(id, 'fullscreen-btn')} />
