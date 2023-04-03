@@ -1,7 +1,6 @@
 import { extendTheme } from "@chakra-ui/react";
 
 
-const PRIMARY = '#FFA6E3'
 
 
 const theme = {

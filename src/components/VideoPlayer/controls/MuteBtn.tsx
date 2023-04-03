@@ -29,13 +29,13 @@ const MuteButton: React.FC<MuteButtonProps> = ({ id, onClick, muted }) => {
     }
 
 
-      const VolumeLow = () => {
-        return (<>
-                   <path fillRule="evenodd" clipRule="evenodd" d="M11.5579 20.9303H6.66839C4.6424 20.9303 3 19.2879 3 17.2619C3 15.2359 4.6424 13.5935 6.6684 13.5935H11.5513L19.5075 9V25.52L11.5579 20.9303Z" fill="white"/>
-                    <path d="M24.0039 14.0801C24.8101 15.2142 25.2391 16.5369 25.2391 17.8885C25.2391 19.2401 24.8101 20.5627 24.0039 21.6969" stroke="white" strokeWidth="2" strokeMiterlimit="10" strokeLinecap="round"/>
-                </>
-        )
-    }
+    //   const VolumeLow = () => {
+    //     return (<>
+    //                <path fillRule="evenodd" clipRule="evenodd" d="M11.5579 20.9303H6.66839C4.6424 20.9303 3 19.2879 3 17.2619C3 15.2359 4.6424 13.5935 6.6684 13.5935H11.5513L19.5075 9V25.52L11.5579 20.9303Z" fill="white"/>
+    //                 <path d="M24.0039 14.0801C24.8101 15.2142 25.2391 16.5369 25.2391 17.8885C25.2391 19.2401 24.8101 20.5627 24.0039 21.6969" stroke="white" strokeWidth="2" strokeMiterlimit="10" strokeLinecap="round"/>
+    //             </>
+    //     )
+    // }
 
 
 

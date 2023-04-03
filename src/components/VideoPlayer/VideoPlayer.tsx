@@ -1,5 +1,5 @@
 import React, { useRef } from "react"
-import { Box, Flex  } from "@chakra-ui/react";
+import { Flex  } from "@chakra-ui/react";
 import useVideoPlayer from "./useVideoPlayer";
 import PlayButton, { PlayBtnType } from "./controls/PlayBtn";
 import FullScreenButton from "./controls/FullScreenButton";
