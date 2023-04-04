@@ -1,5 +1,5 @@
-This project was bootstrapped with
-[Demo](https://github.com/facebook/create-react-app).
+This project was as react example
+[Demo](http://videoplayercomponent-20230403202406-hostingbucket-dev.s3-website-us-east-1.amazonaws.com/).
 
 ## Available Scripts
 

@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-videoplayercomponent-dev-202156-authRole",
+      "UnauthRoleArn": "arn:aws:iam::792362469816:role/amplify-videoplayercomponent-dev-202156-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::792362469816:role/amplify-videoplayercomponent-dev-202156-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-videoplayercomponent-dev-202156-deployment",
+      "UnauthRoleName": "amplify-videoplayercomponent-dev-202156-unauthRole",
+      "StackName": "amplify-videoplayercomponent-dev-202156",
+      "StackId": "arn:aws:cloudformation:us-east-1:792362469816:stack/amplify-videoplayercomponent-dev-202156/b6483090-d27e-11ed-a988-0a41bb075611",
+      "AmplifyAppId": "d11t9oj78ypycw"
+    },
+    "categories": {
+      "hosting": {
+        "S3AndCloudFront": {}
+      }
+    }
+  }
+}
