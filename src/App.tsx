@@ -1,8 +1,9 @@
 import  React from "react"
 import {
   ChakraProvider,
-  Container,
+  Flex,
   Grid,
+  Text,
 } from "@chakra-ui/react"
 import { ColorModeSwitcher } from "./ColorModeSwitcher"
 import {VideoPlayer} from "./components/VideoPlayer"
@@ -14,13 +15,19 @@ const VIDEO_SOURCE = 'https://ours-wellness-testing-public.s3.us-west-2.amazonaw
 
 const VideoPlayerWrapper = () => {
   return  (
-          <Container>
+          <Flex
+              alignContent={"center"}
+            justifyContent="center"
+            alignSelf={'center'}
+            alignItems="center"
+            flexDirection={"column"}
+          >
+              <Text>React Video Player</Text>
               <VideoPlayer
                 source={VIDEO_SOURCE}
                 id={'firstPlayer'}
               />
-          </Container>
-            
+          </Flex>
          )
 }
 
