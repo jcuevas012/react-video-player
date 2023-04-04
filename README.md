@@ -37,3 +37,8 @@ In the project directory, you can run:
         isVideoEnd
      } = useVideoPlayer(videoElement)
 ```
+
+
+## Deploy
+
+This project is using amplify in order to move faster with the demo
