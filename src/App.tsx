@@ -15,8 +15,7 @@ const VIDEO_SOURCE = 'https://ours-wellness-testing-public.s3.us-west-2.amazonaw
 
 const VideoPlayerWrapper = () => {
   return  (
-          <Container
-          >
+          <Container>
               <Text>React Video Player</Text>
               <VideoPlayer
                 source={VIDEO_SOURCE}
